@@ -7,7 +7,7 @@ The purpose of this project is to analyze Amazon reviews written by members of t
 
 Amazon provides approximately 50 review datasets organized by product families. Each one contains reviews of a specific product, from clothing apparel to wireless products. 
 
-The project selects one of these review datasets and transforms the data in order to establish if the vine reviews show any bias versus the non-paid reviews.
+The project selects one of these review datasets and transforms the data to establish if the Vine reviews show any bias versus the non-paid reviews.
 
 ### Methodology
 
@@ -15,11 +15,11 @@ Our analysis was conducted utilizing a *PySpark* notebook in *Google Colab*. The
 
 The code launches a *Spark Session* to read the Amazon reviews for the camera category from an Amazon AWS S3 bucket, available at the url *https://s3.amazonaws.com/amazon-reviews-pds/tsv/amazon_reviews_us_Camera_v1_00.tsv.gz*. 
 
-This database contained a total of 1,801,974 reviews. The data was converted to a dataframe, and then various filters were applied to obtain our results. These filters included first selecting a subset of the data with total count of reviews greater than or equal to 20. Then, this subset was filtered to account for customer feedback, were the helpful votes were at least 50% of the total votes. Next, we grouped the data by paid vine reviews, versus non-paid reviews. Finally, we created a data table to report the percentage of 5 star reviews to total reviews for each of the two groups, the paid vine and the un-paid reviews. To determine bias, we compared the relative percentages.
+This database contained a total of 1,801,974 reviews. The data was converted to a dataframe, and then various filters were applied to obtain our results. These filters included first selecting a subset of the data with total count of reviews greater than or equal to 20. Then, this subset was filtered to account for customer feedback, where the helpful votes were at least 50% of the total votes. Next, we grouped the data by paid Vine reviews, versus non-paid reviews. Finally, we created a data table to report the percentage of 5-star reviews to total reviews for each of the two groups, the paid Vine and the non-paid reviews. To determine bias, we compared the relative percentages.
 
 ## Results
 
-After running our code, we are able to address the following key metrics:
+After running our code, the results provide summary data to address the following key metrics:
 
 * *How many Vine reviews and non-Vine reviews were there?*
 
@@ -46,17 +46,17 @@ Given that 5-star Vine reviews reported a lower percentage of total reviews when
 
 It may be less likely that review bias occurs with reviews having larger vote counts and counts were customers find the review helpful, as true choice is validated by more customers.
 
-We would therefore conduct the analysis without one of the first two filters, and also without both of them, to see if for smaller vote counts, or for counts were customers are not finding them as helpful, there is a positivity bias in the Vine program.
+We would therefore conduct the analysis without one of the first two filters, as well as without both of them, to see if for smaller vote counts, or for counts where customers are not finding them as helpful, there is a positivity bias in the Vine program.
 
 ## APPENDIX
 
-This appendix covers the process followed for Delivery 1 of the project. Delivery 1 entailed an ETL process on a data file through the following steps:
+This appendix covers the methodology followed for Delivery 1 of the project. Delivery 1 entailed an ETL process on a data file through the following steps:
 
 * Creating a new Postgres SQL database in Amazon AWS RDS.
 
-* Creating a new database in pgAdmin by creating a new Amazon RDS server connection.
+* Creating a new database in pgAdmin by establishing a new Amazon RDS server connection.
 
-* Run a query in pgAdmin to create the *customers_table*, *products_table*, *review_id_table*, and *vine_table*.
+* Running a query in pgAdmin to create the *customers_table*, *products_table*, *review_id_table*, and *vine_table*.
 
 * Creating a new *PySpark* notebook in *Google Colab*. The notebook *.ipynb* file is included in this repository as *Amazon_Reviews_ETL.ipynb*.
 
@@ -64,11 +64,11 @@ This appendix covers the process followed for Delivery 1 of the project. Deliver
 
 * Transforming the extracted data to create the necessary tables as dataframes.
 
-* Connecting the *Spark* Session to our AWS RDS instance, and loading the dataframes that correspond to the tables in pgAdmin.
+* Connecting the *Spark Session* to our AWS RDS instance, and loading the dataframes that correspond to the tables in pgAdmin.
 
 * Running several queries in pgAdmin to verify that the tables were loaded correctly.
 
-The following screenshots and the accompaning *PySpark* notebook show that each of the loaded tables match.
+The following screenshots and the accompanying *PySpark* notebook show that each of the loaded tables match.
 
 #### Customers_Table Query
 ![Customers Table Query](Resources/images/customers_table_query.png)
